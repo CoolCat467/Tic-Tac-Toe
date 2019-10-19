@@ -15,8 +15,10 @@
 # Import random's radint for random intigers
 #NOTE TO DEVELEPORS:
 #This Program has the ability to have an AI Play it. If you
-#are interested, contact me at davenport.samuel09@gmail.com
-#and in body say 'I want to work on the Tic tac toe AI'.
+#are interested, contact me on github
+
+NAME = 'Tic Tac Toe'
+__version__ = '0.0.1'
 
 import os, sys, time, math
 from pathlib import Path
