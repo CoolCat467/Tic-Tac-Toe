@@ -14,6 +14,11 @@
 # Import math for square root function
 # Import random's radint for random intigers
 
+NAME = "Samuel Davenport's AI"
+author = 'Samuel Davenport'
+registered = True
+__version__ = '0.0.1'
+
 import os, sys, time, math
 import random
 global lists
@@ -101,34 +106,6 @@ def getext(nums):
                 text = text + chr(int(num) + 32)
             control = 1
     return text
-
-def partquotes(text, witch, how=False):
-    '''takes input, like "I think 'cats' are so 'cool' yay",
-    in input text, which defines which part im quotes
-    of 'cats' and 'cool' gets returned. if how is set True,
-    it takes text input, which is ignored, and it returns
-    howmany parts are in quotes in the text.'''
-    ftimes = 0
-    found = False
-    for i in text:
-        if not found:
-            if i == "'":
-                found = True
-                ftimes = ftimes + 1
-                var = 'l' + str('i' * ftimes)
-                exec("%s = ''" % var)
-                to = "%s = %s + " % (var, var)
-        else:
-            if i != "'":
-                exec(str(to) + "'" + i + "'")
-            else:
-                found = False
-    var = 'l' + str('i' * int(witch))
-    if not how:
-        toreturn = eval(var)
-    else:
-        toreturn = ftimes
-    return toreturn
 
 def getCordInf(x, y):
     #return data about the given playing choordinits
@@ -307,7 +284,7 @@ def planok(who):
         dalist = 'plan'
     else:
         dalist = 'lpplan'
-    if not eval(dalist) == 'CM':
+    if not eval(dalist) in ('CM', 'NULL'):
         howmanyok = 0
         litmp = eval(dalist) #i = 'CA' or other
         tmp = list(eval(litmp)) #tmp = ['A1', 'A2', 'A3']
@@ -365,10 +342,18 @@ def emergencypickplan(who):
         if who == 2:
             plan = str(daplans[choose])
         else:
-            lpplan = str(dapland[choose])
+            lpplan = str(daplans[choose])
+    elif len(pplans) >= 1:
+        choose = int(random.randint(0, len(pplans) - 1))
+        if who == 2:
+            plan = str(pplans[choose])
+        else:
+            lpplan = str(pplans[choose])
     else:
-        print('Devel')
+        print('Developer Data Before Crash:')
+        print(daplans)
         print(pplans)
+        print(who)
         if who == 2:
             print(plan)
         else:
@@ -460,7 +445,7 @@ def aiturn():
         while not ok:
             getpossibleplans()
             chooseplan(2)
-            times = times + 1
+            times += 1
             if times > 3:
                 emergencypickplan(2)
             if times > 5:
@@ -468,10 +453,9 @@ def aiturn():
                     plan = plans[times - 5]
                 except IndexError:
                     times = 0
-                    print('Uh oh...')
+                    print('AI: Resetting due to Error...')
                     reset()
             ok = planok(2)
-            time.sleep(0.3)
     ok = planok(1)
     if not ok:
         times = 0
@@ -482,14 +466,12 @@ def aiturn():
             if times > 5:
                 emergencypickplan(1)
             if times > 7:
-                raise RuntimeError('Attemted fix too manny times')
+                raise RuntimeError('AI: Attemted fix too manny times')
             ok = planok(1)
-            time.sleep(0.3)
     chooseplay()
     ok = playok()
     if not ok:
         while not ok:
-            time.sleep(1)
             print('AI: ERR: Play Not Ok')
             print('AI: MSG: Resetting Selected Play...')
             chooseplay()
@@ -526,22 +508,8 @@ def play(pid, locx, locy):
 def update(data):
     #program that gets run to update data for the AI
     decdata = str(getext(data))
-    x = int(decdata[0])
-    y = int(decdata[1])
-    who = int(decdata[2])
+    x, y, who = decdata
     return play(who, x, y)
-
-class mini:
-    def start(self):
-        while True:
-            try:
-                time.sleep(0.01)
-            except KeyboardInterrupt:
-                print('Devel')
-                print(lpplan)
-            else:
-                time.sleep(0.01)
-    pass
 
 def turn():
     #program that accually gets the AI's play data and sends it to
@@ -559,15 +527,15 @@ def reset():
         for ii in range(3):
             play(0, int(i + 1), int(ii + 1))
 
-def start():
+def init():
     global plan
     global pplans
     plan = 'NULL'
     pplans = []
-    print('AI Created by Samuel Davenport')
-    print('This has been registered by Cat Inc.')
-    print('to work with the Tic Tac Toe API.')
+    if registered:
+        print('AI: This AI has been registered by Cat Ink.')
+        print('to work with the Tic Tac Toe Game.')
     reset()
 
-print('AI Module Loaded')
-print('AI Created by Samuel Davenport')
+print('AI: AI Module Loaded')
+print('AI: '+NAME+' Created by '+author)
