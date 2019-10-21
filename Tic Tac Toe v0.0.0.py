@@ -18,7 +18,7 @@
 #are interested, contact me on github
 
 NAME = 'Tic Tac Toe'
-__version__ = '0.0.1'
+__version__ = '0.0.0'
 
 import os, sys, time, math
 from pathlib import Path
