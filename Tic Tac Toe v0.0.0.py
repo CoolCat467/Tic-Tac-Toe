@@ -20,7 +20,7 @@
 NAME = 'Tic Tac Toe'
 __version__ = '0.0.0'
 
-import os, sys, time, math
+import os, sys, time
 from pathlib import Path
 from random import randint as rand
 
