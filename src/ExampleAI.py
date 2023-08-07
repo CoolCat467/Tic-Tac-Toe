@@ -20,7 +20,6 @@ REGISTERED = True
 # Please send your finnished version of your AI to CoolCat467 at Github
 # for review and testing and obain permission to change this flag to True
 
-import random
 
 global BOARD
 
@@ -125,8 +124,6 @@ class Array(object):
                     y = self.getRow(x).index(value)
                     return x, y
         raise ValueError("%s is not in array" % value)
-
-    pass
 
 
 def safe(function):

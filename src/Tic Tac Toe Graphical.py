@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 # Program that plays tic tac toe, graphically.
 
-import math
 import os
 import sys
 import time
 from pathlib import Path
 from random import randint as rand
-from tkinter import *
 
 PREBOOTERR = ""
 try:
@@ -436,8 +434,6 @@ class game:
         else:
             print(maths.timeCalc(int(round(time.time() - startTime))))
             sys.exit()
-
-    pass
 
 
 def loop():

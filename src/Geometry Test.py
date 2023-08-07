@@ -70,5 +70,5 @@ def penta():
 
 if __name__ == "__main__":
     init()
-    #penta()
+    # penta()
     loading(250, 250, 8, linewidth=1)

@@ -10,8 +10,6 @@ __version__ = "0.0.1"
 
 __game__ = "Tic Tac Toe"
 
-import math
-import os
 import random
 
 global lists
